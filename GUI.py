@@ -1,6 +1,3 @@
-from scipy.optimize import fsolve
-from scipy.integrate import solve_ivp
-from sympy.utilities.lambdify import lambdify
 import tkinter as tk
 from tkinter import messagebox
 import subprocess
