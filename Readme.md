@@ -414,4 +414,6 @@ By combining the foundational HopperSim model with our kinematic applications, w
 This simulation package provides a modular approach to modeling and visualizing one-legged robot dynamics. Each file targets specific aspects of the motion, while the GUI serves as an integration point for user interaction.
 
 ## Future Plan
-Our future goal is to develop a one-legged jumping robot capable of moving in a 3D plane. The robot will accept inputs for jump height and direction through a custom-designed controller simulated in the system. The entire implementation, including the robot's motion and control system, will be simulated in Gazebo to ensure realistic testing and performance evaluation.![alt text](video/Future_plan_pic.png)
+Our future goal is to develop a one-legged jumping robot capable of moving in a 3D plane. The robot will accept inputs for jump height and direction through a custom-designed controller simulated in the system. The entire implementation, including the robot's motion and control system, will be simulated in Gazebo to ensure realistic testing and performance evaluation.
+
+![alt text](video/Future_plan_pic.png)
