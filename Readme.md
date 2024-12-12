@@ -99,9 +99,9 @@ T = \frac{1}{2} m (\dot{x}^2 + \dot{y}^2)
 $$
 
 where:
-- $ m $ is the mass of the robot,
-- $ \dot{x} $ is the horizontal velocity,
-- $ \dot{y} $ is the vertical velocity.
+- $m$ is the mass of the robot,
+- $\dot{x}$ is the horizontal velocity,
+- $\dot{y}$ is the vertical velocity.
 
 #### Potential Energy ( $V$ )
 
@@ -112,11 +112,11 @@ V = mgy + \frac{1}{2} k (l - l_0)^2
 $$
 
 where:
-- $ g $ is the gravitational acceleration,
-- $ y $ is the height of the robot,
-- $ k $ is the spring stiffness,
-- $ l $ is the current length of the spring,
-- $ l_0 $ is the natural length of the spring.
+- $g$ is the gravitational acceleration,
+- $y$ is the height of the robot,
+- $k$ is the spring stiffness,
+- $l$ is the current length of the spring,
+- $l_0$ is the natural length of the spring.
 
 ### Euler-Lagrange Equations
 
@@ -127,10 +127,10 @@ $$
 $$
 
 where:
-- $ q $ represents the generalized coordinates, such as $ x $ and $ y $,
-- $ \dot{q} $ represents the velocities of those coordinates.
+- $q$ represents the generalized coordinates, such as $x$ and $y$,
+- $\dot{q}$ represents the velocities of those coordinates.
 
-From this equation, the accelerations $ \ddot{x} $ and $ \ddot{y} $ are determined:
+From this equation, the accelerations $\ddot{x}$ and $\ddot{y}$ are determined:
 
 $$
 \ddot{x} = f_x(x, y, \dot{x}, \dot{y})
@@ -148,16 +148,16 @@ The dynamics of the jump involve **damping**, **torque generation**, and **phase
 
 #### Adjusting Damping
 
-Damping is applied dynamically during the jump to absorb impact forces and stabilize motion. The damping coefficient $ c $ is calculated as:
+Damping is applied dynamically during the jump to absorb impact forces and stabilize motion. The damping coefficient $c$ is calculated as:
 
 $$
 c = c_{\text{base}} + c_{\text{gain}} \cdot |\dot{y}|
 $$
 
 where:
-- $ c_{\text{base}} $ is the base damping coefficient,
-- $ c_{\text{gain}} $ is a gain factor that increases damping for higher velocities,
-- $ \dot{y} $ is the vertical velocity during landing.
+- $c_{\text{base}}$ is the base damping coefficient,
+- $c_{\text{gain}}$ is a gain factor that increases damping for higher velocities,
+- $\dot{y}$ is the vertical velocity during landing.
 
 This ensures that high-speed impacts are absorbed smoothly.
 
@@ -166,27 +166,31 @@ This ensures that high-speed impacts are absorbed smoothly.
 To achieve a desired jump height, the torque required to compress the spring is calculated as follows:
 
 1. Calculate the required energy to reach the target height:
-   $$
-   E_{\text{required}} = m g h_{\text{desired}}
-   $$
 
-2. Determine the spring compression distance ( $\Delta l$ ):
-   $$
-   \Delta l = \sqrt{\frac{2 E_{\text{required}}}{k}}
-   $$
+$$
+E_{\text{required}} = m g h_{\text{desired}}
+$$
 
-3. Calculate the spring force ( $F$ ):
-   $$
-   F = k \Delta l
-   $$
+3. Determine the spring compression distance ( $\Delta l$ ):
 
-4. Calculate the torque ( $\tau$ ):
-   $$
-   \tau = F \cdot r
-   $$
+$$
+\Delta l = \sqrt{\frac{2 E_{\text{required}}}{k}}
+$$
+
+5. Calculate the spring force ( $F$ ):
+
+$$
+F = k \Delta l
+$$
+
+7. Calculate the torque ( $\tau$ ):
+
+$$
+\tau = F \cdot r
+$$
 
 where:
-- $ r $ is the radius of the pulley.
+- $r$ is the radius of the pulley.
 
 These calculations ensure that the robot compresses the spring optimally to achieve the desired height.
 
@@ -195,7 +199,7 @@ These calculations ensure that the robot compresses the spring optimally to achi
 
 #### Kinematics of the Tail
 
-**Forward Kinematics** determines the end position of the tail based on its angle ( $ \theta $ ):
+**Forward Kinematics** determines the end position of the tail based on its angle ( $\theta$ ):
 
 $$
 x_{\text{end}} = x + l_{\text{tail}} \sin(\theta)
@@ -206,8 +210,8 @@ y_{\text{end}} = y - l_{\text{tail}} \cos(\theta)
 $$
 
 where:
-- $ l_{\text{tail}} $ is the length of the tail,
-- $ x, y $ are the coordinates of the robot’s hip.
+- $l_{\text{tail}}$ is the length of the tail,
+- $x, y$ are the coordinates of the robot’s hip.
 
 **Inverse Kinematics** calculates the required tail angle to stabilize the robot by reaching a target position:
 
@@ -217,18 +221,18 @@ $$
 
 #### PD Control of the Tail
 
-A **Proportional-Derivative (PD) Controller** adjusts the tail angle to maintain balance. The control torque ( $ \tau_{\text{tail}} $ ) is calculated as:
+A **Proportional-Derivative (PD) Controller** adjusts the tail angle to maintain balance. The control torque ( $\tau_{\text{tail}}$ ) is calculated as:
 
 $$
 \tau_{\text{tail}} = k_p (\theta_{\text{desired}} - \theta) - k_d \cdot \dot{\theta}
 $$
 
 where:
-- $ \theta_{\text{desired}} $ is the desired tail angle,
-- $ \theta $ is the current tail angle,
-- $ \dot{\theta} $ is the angular velocity of the tail,
-- $ k_p $ is the proportional gain,
-- $ k_d $ is the derivative gain.
+- $\theta_{\text{desired}}$ is the desired tail angle,
+- $\theta$ is the current tail angle,
+- $\dot{\theta}$ is the angular velocity of the tail,
+- $k_p$ is the proportional gain,
+- $k_d$ is the derivative gain.
 
 This torque helps stabilize the robot by countering imbalances during the jump.
 
@@ -242,10 +246,10 @@ The simulation models three key phases:
 
 2. **Contact Phase**:
    - Simulates the compression of the spring when the foot contacts the ground.
-   - Transition occurs when $ y \leq l_0 \cos(\theta) $.
+   - Transition occurs when $y \leq l_0 \cos(\theta)$.
 
 3. **Apex Phase**:
-   - Detects the highest point of the jump when $ \dot{y} = 0 $.
+   - Detects the highest point of the jump when $\dot{y} = 0$.
 
 ### Combined Dynamics: Torque and Tail Control
 
@@ -253,37 +257,37 @@ The file `jump_wth_spring_theta_torque.py` combines the torque required for prop
 
 ### Eigenvalues and Stability Analysis
 
-To analyze the stability of the system, eigenvalues are calculated from the system's linearized dynamics matrix $ A $. These eigenvalues help determine whether the system is stable (eigenvalues with negative real parts) or unstable (eigenvalues with positive real parts).
+To analyze the stability of the system, eigenvalues are calculated from the system's linearized dynamics matrix $A$. These eigenvalues help determine whether the system is stable (eigenvalues with negative real parts) or unstable (eigenvalues with positive real parts).
 
 1. **Dynamics Representation**  
    The system is expressed in state-space form:
 
-   $$
-   \dot{X} = A X + B U
-   $$
+$$
+\dot{X} = A X + B U
+$$
 
    where:
-   - $ X $ is the state vector (e.g., $ [x, y, \dot{x}, \dot{y}, \theta_{\text{tail}}, \dot{\theta}_{\text{tail}}] $),
-   - $ A $ is the Jacobian matrix of the system derived from the equations of motion,
-   - $ B $ is the input matrix.
+   - $X$ is the state vector (e.g., $[x, y, \dot{x}, \dot{y}, \theta_{\text{tail}}, \dot{\theta}_{\text{tail}}]$),
+   - $A$ is the Jacobian matrix of the system derived from the equations of motion,
+   - $B$ is the input matrix.
 
 2. **Jacobian Matrix Calculation**  
-   The Jacobian matrix $ A $ is calculated from the equations of motion (EOM) using **Lagrangian mechanics**:
+   The Jacobian matrix $A$ is calculated from the equations of motion (EOM) using **Lagrangian mechanics**:
 
-   $$
-   A = \frac{\partial F}{\partial X}
-   $$
+$$
+A = \frac{\partial F}{\partial X}
+$$
 
-   where $ F $ represents the dynamics equations. This is computed numerically or symbolically using:
+   where $F$ represents the dynamics equations. This is computed numerically or symbolically using:
 
    - sympy.Matrix.jacobian() for symbolic derivation,
    - numpy.linalg.eig() for eigenvalue computation.
 
 3. **Eigenvalue Interpretation**  
-   After computing $ A $, eigenvalues $ \lambda $ are derived to evaluate the stability:
+   After computing $A$, eigenvalues $\lambda$ are derived to evaluate the stability:
 
-   - $ \text{Re}(\lambda) < 0 $: Stable.
-   - $ \text{Re}(\lambda) > 0 $: Unstable.
+   - $\text{Re}(\lambda) < 0$: Stable.
+   - $\text{Re}(\lambda) > 0$: Unstable.
 
    This analysis provides insight into whether the robot's motion will converge to a stable equilibrium or diverge.
 
@@ -295,7 +299,7 @@ To analyze the stability of the system, eigenvalues are calculated from the syst
   - Adjusts damping coefficient dynamically based on landing velocity.
   - Focuses on smooth landing and jump transitions.
   
-  <video controls src="../video/Jump_with_Damp.mp4" title="Title"></video>
+https://github.com/user-attachments/assets/4a6fd8a1-35d7-4021-9315-fea6ef564dad
 
 ### **2. jump_with_spring_cross_wall.py**
 - **Purpose**: Simulates wall interaction during a jump.
@@ -304,7 +308,7 @@ To analyze the stability of the system, eigenvalues are calculated from the syst
   - Incorporates **Eigenvalue Analysis** to evaluate stability during wall interaction.
   - Useful for testing horizontal propulsion and obstacle handling.
 
-  <video controls src="../video/Jump_cross_wall.mp4" title="Title"></video>
+https://github.com/user-attachments/assets/b80f6389-22a9-4660-87f0-803b318bffcf
 
 ### **3. jump_with_spring_height.py**
 - **Purpose**: Calculates the required torque to achieve a target jump height.
@@ -312,27 +316,28 @@ To analyze the stability of the system, eigenvalues are calculated from the syst
   - Uses energy-based calculations to determine spring compression.
   - Focuses on vertical motion and height dynamics.
   
-  <video controls src="../video/Jump_with_high.mp4" title="Title"></video>
+https://github.com/user-attachments/assets/f620ad46-1763-4433-b1a0-239989a1f867
 
 ### **4. jump_with_spring_theta.py**
 - **Purpose**: Focuses on controlling the jump angle $(\theta)$.
 - **Key Features**:
   - Adjusts $\theta$ to stabilize the robot during landing and takeoff.
   
-  <video controls src="../video/Jump_with_Theta.mp4" title="Title"></video>
+https://github.com/user-attachments/assets/a5607620-0e06-4c8a-b2ed-8c560587a459
+
 ### **5. jump_with_spring_torque.py**
 - **Purpose**: Focuses on torque application for jumping.
 - **Key Features**:
   - Models spring compression and the resulting torque for propulsion.
   
-  <video controls src="../video/Jump_with_Torque.mp4" title="Title"></video>
+https://github.com/user-attachments/assets/1cadf9be-3f87-44d1-9f6e-2d518d237604
 
 ### **6. jump_wth_spring_theta_torque.py**
 - **Purpose**: Combines $\theta$ control and torque dynamics.
 - **Key Features**:
   - Integrates angular and torque considerations for optimal stability and jump performance.
   
-  <video controls src="../video/Jump_with_Theta_Torque.mp4" title="Title"></video>
+https://github.com/user-attachments/assets/d8771cfe-afad-495e-9b67-dd5db6a37d7e
 
 ### **7. GUI.py**
 - **Purpose**: Provides a graphical interface to interact with all simulations.
@@ -341,7 +346,7 @@ To analyze the stability of the system, eigenvalues are calculated from the syst
   - Combines tools from other files into a single application.
   - Provides parameter control such as jump height, damping, and angle $(\theta)$ through a user-friendly interface.
   
-  <video controls src="../video/GUI.mp4" title="Title"></video>
+https://github.com/user-attachments/assets/b53f7542-5567-4776-95e2-2aba16af2897
 
 ## Animation and Visualization
 
@@ -388,7 +393,7 @@ By combining the foundational HopperSim model with our kinematic applications, w
 </p>
 <p align="center">
   <a href="https://youtu.be/wzC50ONPQPE">
-    <img src="../video/origin.png" alt="Watch the video" width="50%">
+    <img src="video/origin.png" alt="Watch the video" width="50%">
   </a>
 </p>
 
@@ -399,7 +404,7 @@ By combining the foundational HopperSim model with our kinematic applications, w
 
 <p align="center">
   <a href="https://youtu.be/8rI8XFj2Hz8">
-    <img src="../video/our_implement.png" alt="Watch the video" width="50%">
+    <img src="video/our_implement.png" alt="Watch the video" width="50%">
   </a>
 </p>
 
@@ -409,4 +414,4 @@ By combining the foundational HopperSim model with our kinematic applications, w
 This simulation package provides a modular approach to modeling and visualizing one-legged robot dynamics. Each file targets specific aspects of the motion, while the GUI serves as an integration point for user interaction.
 
 ## Future Plan
-Our future goal is to develop a one-legged jumping robot capable of moving in a 3D plane. The robot will accept inputs for jump height and direction through a custom-designed controller simulated in the system. The entire implementation, including the robot's motion and control system, will be simulated in Gazebo to ensure realistic testing and performance evaluation.![alt text](../video/Future_plan_pic.png)
+Our future goal is to develop a one-legged jumping robot capable of moving in a 3D plane. The robot will accept inputs for jump height and direction through a custom-designed controller simulated in the system. The entire implementation, including the robot's motion and control system, will be simulated in Gazebo to ensure realistic testing and performance evaluation.![alt text](video/Future_plan_pic.png)
